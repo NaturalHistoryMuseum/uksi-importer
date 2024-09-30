@@ -5,8 +5,8 @@
 This tool requires [mdb-tools](https://github.com/mdbtools/mdbtools) to be installed.
 Specifically, this tool uses the following CLI utilities provided by this lib:
 
-- mdb-tables
-- mdb-json
+- `mdb-tables`
+- `mdb-json`
 
 Then for local use:
 
