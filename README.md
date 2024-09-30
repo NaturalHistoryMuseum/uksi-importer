@@ -22,5 +22,7 @@ pip install -e .
 Assuming installation into .venv:
 
 ```bash
-uksi create_db <access-db-path> uksi.db
+uksi create_db <access-db-path> <uksi-db-path>
 ```
+
+A new SQLite DB is created at the given path each time this command is run.
