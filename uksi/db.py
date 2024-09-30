@@ -6,7 +6,7 @@ from typing import Iterable
 
 import dataset
 
-from uksi.utils import batched, log
+from uksi.utils import batched, log, open_db
 
 
 def get_tables(db_file: Path) -> list[str]:
@@ -57,7 +57,7 @@ def make_db(source: Path, target: Path):
     for extra in ["shm", "wal"]:
         target.with_name(f"{target.name}-{extra}").unlink(missing_ok=True)
 
-    with closing(dataset.connect(f"sqlite:///{target.resolve()}")) as db:
+    with open_db(target) as db:
         for table_name in get_tables(source):
             table = db.create_table(table_name, primary_id="_id")
             count = 0

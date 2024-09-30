@@ -1,8 +1,12 @@
+from contextlib import contextmanager, closing
 from datetime import datetime, timezone
 from itertools import islice
-from typing import Iterable
+from pathlib import Path
+from typing import Iterable, ContextManager
 
 import click
+import dataset
+from dataset import Database
 
 
 def batched(iterable: Iterable, size: int) -> Iterable[tuple]:
@@ -30,3 +34,16 @@ def log(message: str, **kwargs):
     """
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     click.secho(f"[{now}] {message}", **kwargs)
+
+
+@contextmanager
+def open_db(path: Path) -> ContextManager[Database]:
+    """
+    Opens the given SQLite database path and yields a dataset Database object. Closes
+    the database after use.
+
+    :param path: the path to the SQLite database
+    :return: yields a Database object
+    """
+    with closing(dataset.connect(f"sqlite:///{path.resolve()}")) as db:
+        yield db
