@@ -1,5 +1,5 @@
 [project]
-name = "uksi-converter"
+name = "uksi-importer"
 version = "0.0.1"
 description = "Scripts for UKSI importing from AccessDB to Data Portal"
 readme = "README.md"
